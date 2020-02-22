@@ -1,20 +1,77 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/World.gd" type="Script" id=2]
+[ext_resource path="res://Assets/kenney.nl/muzzle_03.png" type="Texture" id=3]
+[ext_resource path="res://Assets/rigzsoft/Electric/Electric4.png" type="Texture" id=4]
+[ext_resource path="res://Assets/rigzsoft/Rays/laser1.png" type="Texture" id=5]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.0148148, 0.192593, 0.237037, 0.414815, 0.533333, 0.637037, 0.703704, 0.807407, 0.851852, 0.97037, 0.977778, 0.985185, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 0.976563, 0.971582, 0.953674, 1, 0.875, 0.815079, 0.423828, 1, 0.75, 0.639069, 0.240234, 1, 0.850781, 0.713707, 0.22088, 1, 0.917969, 0.763466, 0.207977, 1, 0.908458, 0.802712, 0.42252, 1, 0.902344, 0.827941, 0.56044, 1, 0.847656, 0.76047, 0.447006, 1, 0.878906, 0.768131, 0.473785, 1, 0.990696, 0.932647, 0.932647, 1, 0.475916, 0.469636, 0.447056, 1, 0.471244, 0.466848, 0.451042, 1, 0.917969, 0.77127, 0.243835, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+flag_disable_z = true
+gravity = Vector3( 0, -98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 2 )
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.0148148, 0.437037, 0.948148 )
+colors = PoolColorArray( 0.980469, 0.945999, 0.945999, 1, 0.300781, 0.601563, 0.601563, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+flag_disable_z = true
+gravity = Vector3( 0, -98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 5 )
+
+[sub_resource type="Gradient" id=7]
+colors = PoolColorArray( 0.0479555, 0.0413818, 0.882813, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 8 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="Particles1" type="Particles2D" parent="."]
 position = Vector2( 128, 256 )
+scale = Vector2( 0.4, 0.4 )
+lifetime = 0.7
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
 
 [node name="Particles2" type="Particles2D" parent="."]
 position = Vector2( 512, 256 )
+rotation = -1.5708
+amount = 12
+lifetime = 0.5
+explosiveness = 1.0
+process_material = SubResource( 6 )
+texture = ExtResource( 4 )
 
 [node name="Particles3" type="Particles2D" parent="."]
 position = Vector2( 896, 256 )
+process_material = SubResource( 9 )
+texture = ExtResource( 5 )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, 304 )
+current = true
 script = ExtResource( 1 )
